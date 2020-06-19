@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>練習作業</title>
+    <style type="text/css">
+        * {
+            /*消除網頁邊框*/
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        
+        .header {
+            height: 80px;
+            background-color: rgb(103, 36, 112);
+            position: relative;
+        }
+        
+        .btn {
+            width: 40px;
+            height: 40px;
+            background-color: rgb(41, 19, 59);
+            display: block;
+            /*規定元入以區塊方式呈現*/
+            position: absolute;
+            /*相對於他的父元素進行絕對定位*/
+            top: 5px;
+            right: 10px;
+        }
+        
+        .btn span {
+            opacity: 0;
+            /*區塊內透明*/
+            width: 1px;
+            height: 1px;
+            display: block;
+            overflow: hidden;
+            /*自動隱藏超出的文字或圖片*/
+        }
+        
+        .btn::before {
+            /*在原本的元素「之前」加入內容*/
+            content: '';
+            position: absolute;
+            height: 2px;
+            left: 2px;
+            width: 36px;
+            background-color: rgb(161, 37, 37);
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            box-shadow: 0px 8px 0px #aaaaaa, 0px -8px 0px #aaa;
+            /*影子*/
+        }
+        
+        body {
+            background-color: silver;
+            background-image: url('https://blog-imgs-72-origin.fc2.com/r/o/n/ronnkoko/nogizaka_background_wallpaper_ipad_retina.png');
+        }
+        
+        nav {
+            width: 30%;
+            height: 100vh;
+            /*view height是螢幕可是範圍高度的百分比*/
+            background-color: #251323;
+            position: absolute;
+            top: 50px;
+            left: -100%;
+        }
+        
+        nav a {
+            /*設置裡面的超連結*/
+            display: block;
+            /*link變直排*/
+            text-decoration: none;
+            color: #e4a9f0;
+            padding: 10px 20px;
+            border-bottom: 1px solid #e4a9f0;
+        }
+        
+        #menu {
+            position: absolute;
+            /*讓最上方的checkbox隱藏*/
+        }
+        
+        #menu:checked~.header nav {
+            left: 0;
+        }
+        
+        img {
+            vertical-align: bottom;
+        }
+        
+        .item-group {
+            width: 100%;
+            max-width: 1400px;
+            margin: auto;
+        }
+        
+        .bg img {
+            width: 100%;
+        }
+        
+        .footer {
+            background-color: rgb(52, 9, 58);
+            color: #aaa;
+            text-align: center;
+            padding: 10px 0;
+        }
+        
+        .title h2 {
+            text-align: center;
+            font-size: 36px;
+            margin: 0 0px 10px;
+        }
+        
+        .title {
+            margin: 0 0px 10px;
+            padding: 20px 10px;
+            background-color: rgb(225, 179, 230);
+        }
+        
+        .title p {
+            font-size: 18px;
+            text-align: center;
+        }
+        
+        .item {
+            margin: 0 10px 20px;
+        }
+        
+        .item .text h1 {
+            font-size: 30px;
+            text-align: left;
+        }
+        
+        .item .pic img {
+            /*設置全圖片*/
+            width: 80%;
+        }
+        
+        .item .b {
+            /*設置全圖片*/
+            width: 30%;
+        }
+        
+        .two {
+            margin: 40px 0;
+            background-color: #ffa;
+        }
+        
+        @media screen and (min-width:768px) {
+            /*設定桌電及平板顯示*/
+            .item-group {
+                display: flex;
+                /*彈性盒子  又稱flexbox*/
+            }
+            .btn {
+                display: none;
+            }
+            .header {
+                display: flex;
+                justify-content: space-between;
+                /*分散對齊*/
+                align-items: center;
+            }
+            nav {
+                position: relative;
+                left: 0;
+                display: flex;
+                width: auto;
+                height: auto;
+                top: 0;
+                background-color: transparent;
+                /*透明顏色*/
+            }
+            nav a {
+                border-bottom: none;
+            }
+        }
+        
+        .two .item {
+            display: flex;
+            margin: 0;
+        }
+        
+        .two .item .pic,
+        .two .item .text {
+            width: 50%;
+            margin-left: 0;
+        }
+        
+        .pic1 {
+            width: 50%;
+            margin-left: 20px;
+        }
+        
+        .two .item .text {
+            display: flex;
+            padding: 0 10px;
+            box-sizing: border-box;
+            flex-direction: column;
+            justify-content: center;
+            text-align: left;
+        }
+        
+        .a {
+            margin: 0 0px 10px;
+            padding: 20px 10px;
+            background-color: rgb(170, 124, 255);
+        }
+        
+        .a p {
+            font-size: 18px;
+            text-align: center;
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            padding-top: 30px;
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .video-container iframe,
+        .video-container object,
+        .video-container embed {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .p h3 {
+            font-size: 24px;
+            text-align: left;
+            margin: 20px 0px 10px;
+        }
+        
+        .p p {
+            margin: 0px 0px 20px;
+        }
+        
+        .p {
+            background-color: rgb(191, 191, 235);
+            color: rgb(35, 5, 63);
+        }
+        
+        .left,
+        .right {
+            margin: 20px;
+            float: none;
+            width: 85%;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="checkbox" name="" id="menu">
+
+    <div class="header">
+        <h1 class="logo">
+            <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Nogizaka46_logo.svg/1200px-Nogizaka46_logo.svg.png" width="60" height="80">
+        </h1>
+        <label for="menu" class="btn"> 
+            <span>選單</span>
+        </label>
+        <nav>
+            <a href="#1">關於乃木坂</a>
+            <a href="#2">乃木坂在哪</a>
+            <a href="#3">推薦成員介紹</a>
+            <a href="#4">歌曲推薦</a>
+        </nav>
+    </div>
+
+    <marquee direction="right" height="60" scrollamount="5" behavior="alternate"><img src="https://pbs.twimg.com/profile_images/1101202672877629440/l_iYBJNa_400x400.jpg" height="60"></marquee>
+    <div class="a">
+        <p><b>努力、感謝、笑顏うちらは乃木坂上り坂46(努力、感謝、笑顏，我們是乃木坂上行之版46！!!)</b></p>
+    </div>
+    <div class="bg">
+        <img src=o19201278p.jpg>
+    </div>
+
+
+    <div>
+        <br>
+    </div>
+    <a name="1">
+        <div class="title ">
+            <h2>關於乃木坂</h2>
+            <p><span style="font-family:DFKai-sb; ">乃木坂46（日語：乃木坂46／のぎざか フォーティーシックス）是日本大型女子偶像團體，成立於2011年8月21日；其出道時定位為另一女子偶像團體AKB48的「官方對手」 ，但有獨立的幕後團隊，行銷策略及團體風格也與AKB48系列團體不同，惟總製作人同樣是秋元康，且與AKB48及其姊妹團體之間常有跨團體的合作或競賽企畫。 團體名字中的「46」是以英語讀作「Forty-six」，而非以日語讀作「四十六／よんじゅうろく」。目前共有43名成員，其中隊長為秋元真夏。其與2015年8月21日成立的櫸坂46
+                、2018年8月20日成立的吉本坂46、以及2019年2月11日自櫸坂46獨立的日向坂46，構成大型偶像團體系列「坂道系列」，。
+            </span></p>
+        </div>
+    </a>
+
+    <a name="2">
+        <div class="two">
+            <div class="item-group "></div>
+            <div class="item ">
+                <div class="pic">
+                    <img src=https://cdn.amebaowndme.com/madrid-prd/madrid-web/images/sites/205468/5d239d14ab0aba62a6c8bbf68970b386_8649ab549532d65bdbac3fe8ce252065.jpg height="550">
+                </div>
+                <div class="text">
+                    <h1>乃木坂在哪!?</h1>
+                    <p><span style="font-family:DFKai-sb; "><h4>《乃木坂在哪裡？》的節目主旨是由乃木坂46的成員們作為主角，挑戰各種不同的綜藝企畫，因此各集節目內容主題變化繁多，並沒有固定的節目主題或流程。除了在攝影棚內拍攝的單元外，也有許多外景攝影的集次，除此之外也常會在攝影棚內進行新曲的現場演出收錄。在節目於2011年開播初期，除了擔任主持人的香蕉人與乃木坂46的成員外，每集節目中都會邀請不同的搞笑藝人來擔任特別來賓，但此作法在2012年底時不再持續，之後除了極少數的特殊單元會邀請特別來賓參與、或安排電視台主播前來擔任節目司儀外，節目通常只由香蕉人與乃木坂46的成員們參演。</h4></span>
+                    </p>
+                    <p><span style="font-family:DFKai-sb; "><h4>由於是乃木坂46最早開播也是最重要的冠名電視節目，除了五花八門的綜藝主題企畫與關於該團體的新訊息發布外，每隔一段期間《乃木坂在哪裡？》就會進行幾個慣例性的內容單元。其中，在每張新單曲發行前，都會有一集以唱名的方式在節目中披露該單曲的選拔成員名單與每個人站位的慣例節目，並在節目中讓獲選的成員每人發表一段簡單的感言。另外，在新單曲的選拔名單確定、但單曲尚未正式發行前，節目也會挑選部分單曲選拔成員進行稱為「單曲大賣祈願活動」（シングルヒット祈願キャンペーン）的外景，由挑選出的成員分組挑戰各種不同的難題，並在攝影棚內發表挑戰的過程影片。</h4></span></p>
+                    <p><span style="font-family:DFKai-sb; "><h4>由於乃木坂46的全體成員人數眾多，通常在此節目錄影時並不會動員全體成員，而是由當時最新單曲的選拔成員作為演出主力，再偶爾配合節目企畫的需要，調整參與錄影的成員名單。</h4></span></p>
+
+                </div>
+            </div>
+        </div>
+        </div>
+    </a>
+
+    <div class="a">
+        <p><b><span style="font-family:DFKai-sb;"><font size="30px">推薦成員介紹</font></span></b></p>
+    </div>
+
+    <a name="3">
+        <div class="item-group ">
+
+
+            <div class="item ">
+                <div class="pic ">
+                    <img src="https://i.imgur.com/lL37V1z.jpg">
+                </div>
+                <div class="text ">
+                    <h3>
+                        <font color="white" ,size="30px">西野七瀬　にしのななせ</font>
+                    </h3>
+                    <h4><span style="font-family:DFKai-sb;"><font color="white">綽號：七仔 鴿子 娜醬</font></span></h4>
+                    <p>
+                        <span style="font-family:DFKai-sb;"><font color="white">娜醬是乃團兩大王牌之一,她的優點真的很多數不完,她是乃團的女朋友,察覺時自己已成乃團王牌,訣別了曾經懦弱的自己,成就傳奇的七年。
+                        民間一直流傳著一句「一見鍾情白石麻衣,察覺時已愛上七瀨」,娜醬性格軟萌，令人有要好好保護的欲望，從前她十分軟弱與缺乏自信，可是她最大的優點便是好強與堅持，娜醬決心要做好的事，從沒有半途而廢過，
+                        只有勇敢的再面對，知道自己的軟弱但絕不願妥協，慢慢的變得更堅強。這樣的女生就是非常勵志，相信也是沒飯不喜歡的。</span></font>
+                    </p>
+                </div>
+            </div>
+
+            <div class="item ">
+                <div class="pic ">
+                    <img src="https://static.wixstatic.com/media/96c195_0c2c1ed715d9499ca32a1d0d0668dafa~mv2.jpg">
+                </div>
+                <div class="text ">
+                    <h3>
+                        <font color="white">齋藤飛鳥　さいとあすか</font>
+                    </h3>
+                    <h4><span style="font-family:DFKai-sb;"><font color="white">綽號：小鳥 鳥兒 Asuka醬</font></span></h4>
+                    <p>
+                        <span style="font-family:DFKai-sb;"><font color="white">乃團次世代王牌，神選美少女，南羊北鳥之一，第七代Center，團寵鳥，以往有著腹黑的人設可是作為王牌後此屬性便隱藏了,會因成員的不幸事件而爆笑,而沒有架子的鳥很受後輩歡迎,經常鎖後輩的喉...從前是很沒自信的鳥，
+                            經歷浮浮沉沉的Under之旅由11單開始連入選拔   開始起飛，到13單開始成為福神，最後到達現在的Ace位置，是經歷過Under至Center的鳥兒，漸漸成熟自信的飛鳥繼生駒白麻等王牌後一直帶領著乃木坂上行，目前是次世代的領頭者帶領著眾成員，開展著以她為首的「飛鳥時代」。</span></font>
+                    </p>
+                </div>
+            </div>
+            <div class="item ">
+                <div class="pic ">
+                    <img src="https://static.wixstatic.com/media/96c195_360a22b4096a43d0b5e0b7690c70f314~mv2.jpg/v1/fill/w_373,h_446,al_c,lg_1,q_80/shiraishimai_prof.webp">
+                </div>
+                <div class="text ">
+                    <h3>
+                        <font color="white">白石麻衣　しらいしまい</font>
+                    </h3>
+                    <h4><span style="font-family:DFKai-sb;"><font color="white">綽號：白麻 老白 黑石 麻衣樣</font></span></h4>
+                    <p>
+                        <span style="font-family:DFKai-sb;"><font color="white">御三家之一，團內唯一現役全福神的成員，第二代Center，她是美的象徵,有著全日本都推崇的顏,她亦有著頂級實力，是乃團實至名歸的Ace，從最初開始便一直在前排帶領著乃團上行的人。
+                            她怕生,很容易跟別人有距離感,可是只要願意找她,她都願意分享她的經驗，只要跟成員們或公式哥哥一起，她立即能製造各個名場面，還能乃團表情包天后的美聲譽。
+                            她為整團打下許多第一次的可能性，令成員往後都能有更多工作及發展, 為乃木坂投入許多感情及付出早以超出工作範疇，團內地位祟高近乎太上皇地位，她在日本也是有相當高名聲。</span></font>
+                    </p>
+                </div>
+            </div>
+            <div class="item ">
+                <div class="pic ">
+                    <img src="https://48pedia.org/images/7/75/2016%E5%B9%B4%E4%B9%83%E6%9C%A8%E5%9D%8246%E3%83%97%E3%83%AD%E3%83%95%E3%82%A3%E3%83%BC%E3%83%AB_%E5%A0%80%E6%9C%AA%E5%A4%AE%E5%A5%88_2.jpg">
+                </div>
+                <div class="text ">
+                    <h3>
+                        <font color="white">堀未央奈　ほりみおな</font>
+                    </h3>
+                    <h4><span style="font-family:DFKai-sb;"><font color="white">綽號：猴莉 羊奶 </font></span></h4>
+                    <p>
+                        <span style="font-family:DFKai-sb;"><font color="white">​二期王牌Ace，吃貨，小編首推，南羊北鳥的羊，初出道的時候空降C位直接脫離研究生位置，然後排位一直向後並趺出選拔，在經歷兩單Under的經驗後14單聖母一拉便重回選拔，最後憑自己努力上回福神位置，是小編很推的女生，小編是私心希望堀仔能有多次做Center的機會，畢竟堀的實力也是擺在眼前，無論演出或是綜藝都是能夠與神之一期生並肩的存在，
+                            現在成熟的堀仔比以往長髮時更是美麗，也更自信，作為鳥的對位基本上站位都不會太差，希望她能夠帶領乃木坂一直上行，並能有當C的機會。</span></font>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+        </div>
+    </a>
+
+
+
+
+</body>
+
+</html>
